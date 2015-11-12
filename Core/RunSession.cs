@@ -12,7 +12,7 @@ namespace calendar
 		}
 
 		public int start;
-		public int duration;
-		public int distance;
+		public long duration;
+		public long distance;
 	}
 }

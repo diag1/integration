@@ -22,7 +22,7 @@ namespace calendar
 			foreach(RunSession k in lst){
 				DateTime f = FromUnixTime (k.start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					med= k.distance;
+					med += k.distance;
 				}
 			}
 			return Convert.ToString(med);
@@ -48,14 +48,16 @@ namespace calendar
 		/// <returns>The vel med day.</returns>
 		/// <param name="day">Day.</param>
 		public String getVelMedDay(DateTime fecha){
-			double med=0.0;
+			long dur = 0;
+			long dist = 0;
 			foreach(RunSession k in lst){
 				DateTime f = FromUnixTime (k.start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					med= k.distance/k.duration;
+					dur+= k.duration;
+					dist += k.distance;
 				}
 			}
-			return Convert.ToString(med);
+			return Convert.ToString(dist / dur);
 		}
 		/// <summary>
 		/// Gets the number stps tot.
@@ -80,7 +82,7 @@ namespace calendar
 			foreach(RunSession k in lst){
 				DateTime f = FromUnixTime (k.start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					med= k.distance/distStep;
+					med+= k.distance/distStep;
 				}
 			}
 			return Convert.ToString(med);
@@ -139,8 +141,8 @@ namespace calendar
 		/// </summary>
 		/// <returns>Total duration.</returns>
 		/// <param name="lt">List of RunSessions</param>
-		private long getDurTot(){
-			long toret=0;
+		private double getDurTot(){
+			double toret=0;
 			foreach(RunSession k in lst){
 				toret+= k.duration;
 			}
@@ -151,8 +153,8 @@ namespace calendar
 		/// </summary>
 		/// <returns>total distance.</returns>
 		/// <param name="lt"> List of RunSessions.</param>
-		private int getDistTotIn(){
-			int toret=0;
+		private double getDistTotIn(){
+			double toret=0;
 			foreach(RunSession k in lst){
 				toret+= k.distance;
 			}

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
 namespace calendar
 {
@@ -64,29 +66,35 @@ namespace calendar
 			var RunSessions = this.runFilter.GetEventsForDay(this.cal.Day);
 
 			if (RunSessions.Count == 0 ) {
-				
 				var label = new Gtk.Label ("No events for this day");
 				label.Show ();
 				this.eventDetail.PackStart (label, true, false, 5);
 
 			} else {
 				
-				var label = new Gtk.Label ("There are " + (RunSessions.Count) + " events for this day");
-				label.Show ();
-				this.eventDetail.PackStart (label, true, false, 5);
-
-
-				var labelRuns = new Gtk.Label ("You have run " + RunSessions.Count + " times this day");
-				labelRuns.Show ();
-				this.eventDetail.PackStart (labelRuns, true, false, 5);
-
 				foreach (RunSession s in RunSessions) {	
 					var hbox = this.BuildRunEvent (s);
 					hbox.Show();
 					this.eventDetail.PackStart (hbox, true, false, 5);
 				}
-					
+
+				var statsVbox = this.buildStatsForDay ();
+				statsVbox.ShowAll ();
+				this.eventDetail.PackStart (statsVbox, true, false, 5);
 			}
+		}
+	
+
+		/// <summary>
+		/// Ises the date.
+		/// </summary>
+		/// <returns><c>true</c>, if date was ised, <c>false</c> otherwise.</returns>
+		/// <param name="a">The alpha component.</param>
+		private bool isDate(string a) 
+		{ //string estará en formato dd/mm/yyyy (dí­as < 32 y meses < 13)
+			//Regex Val = new Regex(@"(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)");
+			//return Val.IsMatch (a);
+			return true;
 		}
 	}	
 }

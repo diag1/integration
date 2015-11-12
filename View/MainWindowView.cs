@@ -17,7 +17,7 @@ namespace calendar
 		{
 			this.RunSessions = RunSessions;
 			this.runFilter = new RunEventFilter (this.RunSessions);
-
+			this.fa = new Functions(this.RunSessions);
 			this.Build();
 		}
 
@@ -51,23 +51,25 @@ namespace calendar
 		/// </summary>
 		private void Build(){
 			SetDefaultSize (600, 600);
+		
+			this.calendarVbox = new Gtk.VBox(false, 5);
+			this.bottomHBox = new Gtk.HBox (true, 5);
+			this.eventDetail = new Gtk.VBox (false, 5);
 
-			var calendarVbox= new Gtk.VBox(false, 5);
-			var detailVbox = new Gtk.VBox (false, 5);
-
-
-			this.eventDetail = new Gtk.VBox (true, 5);
 			this.cal = new Gtk.Calendar ();
-			this.banner = new Gtk.Label ("Calendar");
-
-
 			calendarVbox.PackStart (this.banner, true, false, 5);
 			calendarVbox.PackStart (this.cal, true, false, 5);
 
-			detailVbox.PackStart (this.eventDetail, true, false, 5);
+			this.bottomHBox.PackStart(this.buildStats(), true, false, 5);
+			this.bottomHBox.PackStart (eventDetail, true, false, 5);
+
+
+
+			calendarVbox.PackEnd (bottomHBox, true, false, 5);
+
+
 
 			this.Add(calendarVbox);
-			this.Add (detailVbox);
 
 			// Mark events for calendar
 			this.MarkEventsForMonth (this.cal.Month);
@@ -81,12 +83,65 @@ namespace calendar
 
 		}
 
+		/// <summary>
+		/// Build this instance.
+		/// </summary>
+		private Gtk.VBox buildStats(){
+			var vBoxMain = new Gtk.VBox (false, 5);
+			//widgets
+			var lb1 = new Gtk.Label("ESTADISTICAS");
+			lb1.UseMarkup = true;
+			var lb3 = new Gtk.Label("Distancia: "+fa.getDistTot());
+			var lb4 = new Gtk.Label("Pasos: "+fa.getNumStpsTot());
+			var lb5 = new Gtk.Label("Horas: "+fa.getNumHourTot());
+			var lb6 = new Gtk.Label("Velocidad Media: "+fa.getVelMedTot());
+
+			//vBox
+			vBoxMain.PackStart(lb1,true,false,5);
+			vBoxMain.PackStart(lb3,true,false,5);
+			vBoxMain.PackStart(lb4,true,false,5);
+			vBoxMain.PackStart(lb5,true,false,5);
+			vBoxMain.PackStart(lb6,true,false,5);
+
+			return vBoxMain;
+		}
+
+
+		/// <summary>
+		/// Builds the dia.
+		/// </summary>
+		private Gtk.VBox buildStatsForDay(){
+
+			var dia = this.cal.Date;
+
+			var vBoxDia = new Gtk.VBox (false, 5);
+			//widgets"01/08/2008"
+
+			var lb9 = new Gtk.Label("Distancia: "+fa.getDistDay(dia));
+			var lb10 = new Gtk.Label("Pasos: "+fa.getNumStpsDay(dia));
+			var lb11= new Gtk.Label("Horas: "+fa.getNumHourDay(dia));
+			var lb12= new Gtk.Label("Velocidad Media: "+fa.getVelMedDay(dia));
+
+			//vBox
+		
+			vBoxDia.PackStart(lb9,true,false,5);
+			vBoxDia.PackStart(lb10,true,false,5);
+			vBoxDia.PackStart(lb11,true,false,5);
+			vBoxDia.PackStart(lb12,true,false,5);
+
+			return vBoxDia;
+		}
+	
+	
+
+		private Gtk.HBox bottomHBox;
+		private Gtk.VBox calendarVbox;
 		private Gtk.VBox eventDetail;
 		private Gtk.Label banner;
-		private Gtk.Button btnList;
-		private Gtk.Button btnAdd;
 		private Gtk.Calendar cal;
+		private Fachada fa;
 	}
+
 
 
 }
