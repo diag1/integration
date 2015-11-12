@@ -16,14 +16,23 @@ namespace calendar
 			{""start"":1444923595,""duration"":100, ""distance"":400},
 			{""start"":1444925595,""duration"":1400, ""distance"":1100}
 			]";
-			
+
+			string jsonWeights = @"[
+			{""start"":1446133195,""weight"":80000},
+			{""start"":1444923595,""weight"":85000},
+			{""start"":1444925595,""weight"":86000}
+			]";
 
 
 			var r = new StreamReader (GenerateStreamFromString (jsonRuns));
-			var runSessionList = JSONTransformer.ToRunSessions (r);
+			var sessionList = JSONTransformer.ToRunSessions(r);
 
+			r = new StreamReader (GenerateStreamFromString (jsonWeights));
+			var weightsList = JSONTransformer.ToWeightSessions (r);
+
+			//var recorridos = Recorridos.Crea ();
 			Gtk.Application.Init();
-			var wMain = new MainWindow (runSessionList);
+			var wMain = new MainWindow (sessionList, weightsList);
 			wMain.ShowAll ();
 			Gtk.Application.Run ();
 		}

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace calendar
 {
 	/// <summary>
-	/// Weight event filter.
+	/// Run event filter.
 	/// </summary>
-	public class WeightEventFilter
+	public class RunEventFilter
 	{
-		private List<WeightRunRunRunRunSession> RunRunRunRunSessions;
-		public WeightEventFilter (List<WeightRunRunRunRunSession> RunRunRunRunSessions)
+		private List<RunSession> sessions;
+		public RunEventFilter (List<RunSession> sessions)
 		{
-			this.RunRunRunRunSessions = RunRunRunRunSessions;	
+			this.sessions = sessions;	
 		}
 
 		/// <summary>
@@ -19,21 +19,21 @@ namespace calendar
 		/// </summary>
 		/// <returns>The events for month.</returns>
 		/// <param name="month">Month.</param>
-		public List<WeightRunRunRunRunSession> GetEventsForMonth(int month) {
+		public List<RunSession> GetEventsForMonth(int month) {
 
 			month = month + 1;
 
-			List<WeightRunRunRunRunSession> toret = new List<WeightRunRunRunRunSession> ();
+			List<RunSession> toret = new List<RunSession> ();
 
-			foreach (WeightRunRunRunRunSession s in this.RunRunRunRunSessions) {
-				
-				var date = this.FromUnixTime (s.Start);
+			foreach (RunSession s in this.sessions) {
+				var date = this.FromUnixTime (s.start);
+				System.Console.WriteLine ("MonthIN=" + month + " MonthOUT=" + date.Month);
 				if (date.Month == month) {
 					toret.Add (s);
 				}
 			}
 
-			System.Console.WriteLine ("Number of month RunRunRunRunSessions = " + toret.Count);
+			System.Console.WriteLine ("Number of month sessions = " + toret.Count);
 			return toret;
 		}
 
@@ -42,21 +42,21 @@ namespace calendar
 		/// </summary>
 		/// <returns>The events for day.</returns>
 		/// <param name="day">Day.</param>
-		public List<WeightRunRunRunRunSession> GetEventsForDay(int day) {
+		public List<RunSession> GetEventsForDay(int day) {
 
 			//day = day + 1;
 
-			List<WeightRunRunRunRunSession> toret = new List<WeightRunRunRunRunSession> ();
+			List<RunSession> toret = new List<RunSession> ();
 
-			foreach (WeightRunRunRunRunSession s in this.RunRunRunRunSessions) {
-				var date = this.FromUnixTime (s.Start);
+			foreach (RunSession s in this.sessions) {
+				var date = this.FromUnixTime (s.start);
 				System.Console.WriteLine ("DayIN=" + day + " DayOUT=" + date.Day);
 				if (date.Day == day) {
 					toret.Add (s);
 				}
 			}
 
-			System.Console.WriteLine ("Number of day RunRunRunRunSessions = " + toret.Count);
+			System.Console.WriteLine ("Number of day sessions = " + toret.Count);
 			return toret;
 		}
 
@@ -72,3 +72,4 @@ namespace calendar
 		}
 	}
 }
+

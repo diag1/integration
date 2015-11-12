@@ -1,0 +1,6 @@
+/Users/labkode/Projects/integration/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/labkode/Projects/integration/bin/Debug/Newtonsoft.Json.dll
+/Users/labkode/Projects/integration/bin/Debug/integration.exe.mdb
+/Users/labkode/Projects/integration/bin/Debug/integration.exe
+/Users/labkode/Projects/integration/obj/x86/Debug/integration.exe
+/Users/labkode/Projects/integration/obj/x86/Debug/integration.exe.mdb

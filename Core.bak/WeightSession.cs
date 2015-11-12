@@ -3,11 +3,11 @@
 namespace calendar
 {
 	/// <summary>
-	/// Weight RunRunRunRunSession.
+	/// Weight session.
 	/// </summary>
-	public class WeightRunRunRunRunSession
+	public class WeightSession
 	{
-		public WeightRunRunRunRunSession ()
+		public WeightSession ()
 		{
 		}
 

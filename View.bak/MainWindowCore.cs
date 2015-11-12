@@ -24,6 +24,12 @@ namespace calendar
 				var day = (uint)(runFilter.FromUnixTime (s.start).Day);
 				this.cal.MarkDay (day);
 			}
+
+			// Mark days in the calendar where an event has ocurred
+			foreach (WeightSession s in this.weightFilter.GetEventsForMonth(month)) {
+				var day = (uint)(weightFilter.FromUnixTime (s.Start).Day);
+				this.cal.MarkDay (day);
+			}
 		}
 
 
@@ -61,9 +67,10 @@ namespace calendar
 				this.eventDetail.Remove (w);
 			}
 
-			var RunSessions = this.runFilter.GetEventsForDay(this.cal.Day);
+			var runSessions = this.runFilter.GetEventsForDay(this.cal.Day);
+			var weightSessions = this.weightFilter.GetEventsForDay (this.cal.Day);
 
-			if (RunSessions.Count == 0 ) {
+			if (runSessions.Count == 0 && weightSessions.Count == 0) {
 				
 				var label = new Gtk.Label ("No events for this day");
 				label.Show ();
@@ -71,22 +78,34 @@ namespace calendar
 
 			} else {
 				
-				var label = new Gtk.Label ("There are " + (RunSessions.Count) + " events for this day");
+				var label = new Gtk.Label ("There are " + (runSessions.Count+weightSessions.Count) + " events for this day");
 				label.Show ();
 				this.eventDetail.PackStart (label, true, false, 5);
 
 
-				var labelRuns = new Gtk.Label ("You have run " + RunSessions.Count + " times this day");
+				var labelRuns = new Gtk.Label ("You have run " + runSessions.Count + " times this day");
 				labelRuns.Show ();
 				this.eventDetail.PackStart (labelRuns, true, false, 5);
 
-				foreach (RunSession s in RunSessions) {	
+				foreach (RunSession s in runSessions) {	
 					var hbox = this.BuildRunEvent (s);
 					hbox.Show();
 					this.eventDetail.PackStart (hbox, true, false, 5);
 				}
-					
+
+				var labelWeights = new Gtk.Label ("You have weighted " + weightSessions.Count + " times this day");
+				labelWeights.Show ();
+				this.eventDetail.PackStart (labelWeights, true, false, 5);
+
+				foreach (WeightSession s in weightSessions) {	
+					var hbox = this.BuildWeightEvent (s);
+					hbox.Show();
+					this.eventDetail.PackStart (hbox, true, false, 5);
+				}
+
+
 			}
 		}
 	}	
 }
+

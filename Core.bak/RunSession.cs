@@ -3,7 +3,7 @@
 namespace calendar
 {
 	/// <summary>
-	/// Run RunRunRunRunSession.
+	/// Run session.
 	/// </summary>
 	public class RunSession
 	{
