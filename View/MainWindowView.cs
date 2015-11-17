@@ -91,21 +91,6 @@ namespace calendar
 			var tableStats = getTreeView ();
 
 
-
-			//widgets
-			var lb1 = new Gtk.Label("ESTADISTICAS");
-			lb1.UseMarkup = true;
-			var lb3 = new Gtk.Label("Distancia: "+fa.getDistTot());
-			var lb4 = new Gtk.Label("Pasos: "+fa.getNumStpsTot());
-			var lb5 = new Gtk.Label("Horas: "+fa.getNumHourTot());
-			var lb6 = new Gtk.Label("Velocidad Media: "+fa.getVelMedTot());
-
-			//vBox
-			vBoxMain.PackStart(lb1,true,false,5);
-			vBoxMain.PackStart(lb3,true,false,5);
-			vBoxMain.PackStart(lb4,true,false,5);
-			vBoxMain.PackStart(lb5,true,false,5);
-			vBoxMain.PackStart(lb6,true,false,5);
 			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
@@ -137,7 +122,6 @@ namespace calendar
 		}
 	
 	
-
 		private Gtk.HBox bottomHBox;
 		private Gtk.VBox calendarVbox;
 		private Gtk.VBox eventDetail;

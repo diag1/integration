@@ -166,7 +166,7 @@ namespace calendar
 				listStore.AppendValues( row.ToArray() );
 
 			} catch(Exception e) {
-
+				Console.Write ("excepcion");
 			}
 
 			treeView.EnableGridLines = Gtk.TreeViewGridLines.Both;
