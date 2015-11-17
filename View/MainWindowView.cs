@@ -88,6 +88,10 @@ namespace calendar
 		/// </summary>
 		private Gtk.VBox buildStats(){
 			var vBoxMain = new Gtk.VBox (false, 5);
+			var tableStats = getTreeView ();
+
+
+
 			//widgets
 			var lb1 = new Gtk.Label("ESTADISTICAS");
 			lb1.UseMarkup = true;
@@ -102,7 +106,7 @@ namespace calendar
 			vBoxMain.PackStart(lb4,true,false,5);
 			vBoxMain.PackStart(lb5,true,false,5);
 			vBoxMain.PackStart(lb6,true,false,5);
-
+			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
 
