@@ -98,7 +98,11 @@ namespace calendar
 			//return Val.IsMatch (a);
 			return true;
 		}
-		private Gtk.TreeView getTreeView(){
+		/// <summary>
+		/// Gets the tree view.
+		/// </summary>
+		/// <returns>The tree view.</returns>
+		private Gtk.TreeView getTreeView(bool flag){
 			var treeView = new Gtk.TreeView ();
 
 			try {
@@ -139,34 +143,62 @@ namespace calendar
 
 					treeView.AppendColumn( column );
 				}
+				if(flag==true){
+					// Insert data
+					var row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Distancia" );
+					row.Insert(1,fa.getDistTot());
+					listStore.AppendValues( row.ToArray() );
 
-				// Insert data
-				var row = new List<string>();
-				row.Clear();
-				row.Insert( 0, "Distancia" );
-				row.Insert(1,fa.getDistTot());
-				listStore.AppendValues( row.ToArray() );
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Pasos" );
+					row.Insert(1,fa.getNumStpsTot());
+					listStore.AppendValues( row.ToArray() );
 
-				row = new List<string>();
-				row.Clear();
-				row.Insert( 0, "Pasos" );
-				row.Insert(1,fa.getNumStpsTot());
-				listStore.AppendValues( row.ToArray() );
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Horas" );
+					row.Insert(1,fa.getNumHourTot());
+					listStore.AppendValues( row.ToArray() );
 
-				row = new List<string>();
-				row.Clear();
-				row.Insert( 0, "Horas" );
-				row.Insert(1,fa.getNumHourTot());
-				listStore.AppendValues( row.ToArray() );
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Velocidad Media" );
+					row.Insert(1,fa.getVelMedTot());
+					listStore.AppendValues( row.ToArray() );
+				}
+				else{
+					// Insert data
+					var row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Distancia" );
+					row.Insert(1,fa.getDistDay(dia));
+					listStore.AppendValues( row.ToArray() );
 
-				row = new List<string>();
-				row.Clear();
-				row.Insert( 0, "Velocidad Media" );
-				row.Insert(1,fa.getVelMedTot());
-				listStore.AppendValues( row.ToArray() );
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Pasos" );
+					row.Insert(1,fa.getNumStpsDay(dia));
+					listStore.AppendValues( row.ToArray() );
+
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Horas" );
+					row.Insert(1,fa.getNumHourDay(dia));
+					listStore.AppendValues( row.ToArray() );
+
+					row = new List<string>();
+					row.Clear();
+					row.Insert( 0, "Velocidad Media" );
+					row.Insert(1,fa.getVelMedDay(dia));
+					listStore.AppendValues( row.ToArray() );
+				}
+
 
 			} catch(Exception e) {
-				Console.Write ("excepcion");
+				Console.Write (e);
 			}
 
 			treeView.EnableGridLines = Gtk.TreeViewGridLines.Both;

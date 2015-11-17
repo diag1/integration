@@ -88,9 +88,7 @@ namespace calendar
 		/// </summary>
 		private Gtk.VBox buildStats(){
 			var vBoxMain = new Gtk.VBox (false, 5);
-			var tableStats = getTreeView ();
-
-
+			var tableStats = getTreeView (true);
 			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
@@ -100,28 +98,14 @@ namespace calendar
 		/// Builds the dia.
 		/// </summary>
 		private Gtk.VBox buildStatsForDay(){
-
-			var dia = this.cal.Date;
-
+			dia = this.cal.Date;
 			var vBoxDia = new Gtk.VBox (false, 5);
-			//widgets"01/08/2008"
-
-			var lb9 = new Gtk.Label("Distancia: "+fa.getDistDay(dia));
-			var lb10 = new Gtk.Label("Pasos: "+fa.getNumStpsDay(dia));
-			var lb11= new Gtk.Label("Horas: "+fa.getNumHourDay(dia));
-			var lb12= new Gtk.Label("Velocidad Media: "+fa.getVelMedDay(dia));
-
-			//vBox
-		
-			vBoxDia.PackStart(lb9,true,false,5);
-			vBoxDia.PackStart(lb10,true,false,5);
-			vBoxDia.PackStart(lb11,true,false,5);
-			vBoxDia.PackStart(lb12,true,false,5);
-
+			var tableStats = getTreeView (false);
+			vBoxDia.PackStart(tableStats,true,false,5);
 			return vBoxDia;
 		}
 	
-	
+		private DateTime dia;
 		private Gtk.HBox bottomHBox;
 		private Gtk.VBox calendarVbox;
 		private Gtk.VBox eventDetail;
