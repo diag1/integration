@@ -6,17 +6,15 @@ namespace calendar
 	public partial class AddWindowView
 	{
 		public long GetDate(){
-			Console.WriteLine (date);
 			return this.date;
 		}
 		public long GetTime(){
-			Console.WriteLine (date);
 			return this.time;
 		}
 		public long GetDistance(){
 			return this.distance;
 		}
-		private void introduce ()
+		public void getSessionData ()
 		{
 			var date = this.en1.Text ;
 			var distance = this.en2.Text;

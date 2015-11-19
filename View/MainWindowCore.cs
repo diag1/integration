@@ -99,13 +99,23 @@ namespace calendar
 			var addWindow = new AddWindowView (this);
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
 			if (result == Gtk.ResponseType.Accept) {
+				addWindow.getSessionData ();
 				var date = addWindow.GetDate ();
 				var distance = addWindow.GetDistance ();
 				var time = addWindow.GetTime ();
-				Console.WriteLine (date);
+				this.addSession (date, time, distance);
+
 				//añadir al json
 			}
 			addWindow.Destroy ();
+		}
+		private void addSession(long date, long time, long distance){
+			var session = new RunSession ();
+			session.start = date;
+			session.duration = time;
+			session.distance = distance;
+			this.RunSessions.Add (session);
+			JSONTransformer.ToJson (this.RunSessions);
 		}
 		/// <summary>
 		/// Ises the date.
