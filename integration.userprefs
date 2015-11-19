@@ -1,19 +1,19 @@
 ﻿<Properties StartupItem="integration.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Core/Functions.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="View/MainWindowCore.cs">
     <Files>
       <File FileName="Core/JSONTransformer.cs" Line="1" Column="1" />
-      <File FileName="View/Principal.cs" Line="17" Column="25" />
+      <File FileName="View/Principal.cs" Line="1" Column="1" />
       <File FileName="Core/Principal.cs" Line="1" Column="1" />
-      <File FileName="Core/Functions.cs" Line="78" Column="30" />
-      <File FileName="Core/Fachada.cs" Line="8" Column="37" />
-      <File FileName="Core/RunSession.cs" Line="16" Column="14" />
+      <File FileName="Core/Functions.cs" Line="20" Column="22" />
+      <File FileName="Core/Fachada.cs" Line="1" Column="1" />
+      <File FileName="Core/RunSession.cs" Line="1" Column="1" />
       <File FileName="Core/Reader.cs" Line="1" Column="1" />
       <File FileName="Core/RunEventFilter.cs" Line="1" Column="1" />
       <File FileName="Core/WeightEventFilter.cs" Line="1" Column="1" />
-      <File FileName="View/MainWindowCore.cs" Line="83" Column="60" />
-      <File FileName="View/MainWindowView.cs" Line="63" Column="65" />
-      <File FileName="View/MainWindowCoreStats.cs" Line="2" Column="8" />
+      <File FileName="View/MainWindowCore.cs" Line="270" Column="18" />
+      <File FileName="View/MainWindowView.cs" Line="110" Column="23" />
+      <File FileName="View/MainWindowCoreStats.cs" Line="1" Column="1" />
       <File FileName="View/MainWindowViewStats.cs" Line="10" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>

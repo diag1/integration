@@ -57,17 +57,12 @@ namespace calendar
 			this.eventDetail = new Gtk.VBox (false, 5);
 
 			this.cal = new Gtk.Calendar ();
-			calendarVbox.PackStart (this.banner, true, false, 5);
 			calendarVbox.PackStart (this.cal, true, false, 5);
 
 			this.bottomHBox.PackStart(this.buildStats(), true, false, 5);
 			this.bottomHBox.PackStart (eventDetail, true, false, 5);
 
-
-
 			calendarVbox.PackEnd (bottomHBox, true, false, 5);
-
-
 
 			this.Add(calendarVbox);
 
@@ -88,7 +83,7 @@ namespace calendar
 		/// </summary>
 		private Gtk.VBox buildStats(){
 			var vBoxMain = new Gtk.VBox (false, 5);
-			var tableStats = getTreeView (true);
+			var tableStats = getStatsTreeView (true);
 			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
@@ -100,16 +95,26 @@ namespace calendar
 		private Gtk.VBox buildStatsForDay(){
 			dia = this.cal.Date;
 			var vBoxDia = new Gtk.VBox (false, 5);
-			var tableStats = getTreeView (false);
+			var tableStats = getStatsTreeView (false);
 			vBoxDia.PackStart(tableStats,true,false,5);
 			return vBoxDia;
+		}
+
+		/// <summary>
+		/// Builds the runs for day.
+		/// </summary>
+		/// <returns>The runs for day.</returns>
+		private Gtk.VBox buildRunsForDay(List<RunSession> sessions) {
+			var vBoxMain = new Gtk.VBox (false, 5);
+			var tableStats = getRunsTreeView (sessions);
+			vBoxMain.PackStart(tableStats,true,false,5);
+			return vBoxMain;
 		}
 	
 		private DateTime dia;
 		private Gtk.HBox bottomHBox;
 		private Gtk.VBox calendarVbox;
 		private Gtk.VBox eventDetail;
-		private Gtk.Label banner;
 		private Gtk.Calendar cal;
 		private Fachada fa;
 	}
