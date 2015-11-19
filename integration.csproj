@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\JSONTransformer.cs" />
-    <Compile Include="Core\Principal.cs" />
     <Compile Include="Core\RunEventFilter.cs" />
     <Compile Include="Core\RunSession.cs" />
     <Compile Include="View\MainWindowCore.cs" />
@@ -44,14 +43,9 @@
     <Compile Include="View\Principal.cs" />
     <Compile Include="Core\Fachada.cs" />
     <Compile Include="Core\Functions.cs" />
-    <Compile Include="View\MainWindowCoreStats.cs" />
-    <Compile Include="View\MainWindowViewStats.cs" />
-<<<<<<< HEAD
     <Compile Include="Core\SessionReadWriter.cs" />
-=======
     <Compile Include="View\AddWindowView.cs" />
     <Compile Include="View\AddWindowCore.cs" />
->>>>>>> metemeto
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

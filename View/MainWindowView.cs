@@ -76,6 +76,8 @@ namespace calendar
 			this.cal.DaySelected += (o, args) => this.ShowEventsForDay ();
 			this.cal.MonthChanged += (object sender, EventArgs e) => this.MarkEventsForMonth (this.cal.Month);
 
+			// Show current day after bootstrap
+			this.ShowEventsForDay();
 		}
 
 		/// <summary>
@@ -94,12 +96,9 @@ namespace calendar
 		/// </summary>
 		private Gtk.VBox buildStatsForDay(){
 			dia = this.cal.Date;
-			bIntroducir = new Gtk.Button ("Introduce");
 			var vBoxDia = new Gtk.VBox (false, 5);
 			var tableStats = getStatsTreeView (false);
 			vBoxDia.PackStart(tableStats,true,false,5);
-			vBoxDia.PackStart(bIntroducir,true,false,5);
-
 			return vBoxDia;
 		}
 

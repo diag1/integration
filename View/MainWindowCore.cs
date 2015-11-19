@@ -67,24 +67,13 @@ namespace calendar
 
 			var RunSessions = this.runFilter.GetEventsForDay(this.cal.Day);
 
+
+
 			if (RunSessions.Count == 0 ) {
-				bIntroducir = new Gtk.Button ("Introduce");
 				var label = new Gtk.Label ("No events for this day");
-				label.Show ();
-				bIntroducir.Show ();
 				this.eventDetail.PackStart (label, true, false, 5);
-				this.eventDetail.PackStart (bIntroducir, true, false, 5);
-				//events
-				this.bIntroducir.Clicked += (o, args) => this.showAddSession();
-
+				label.Show ();
 			} else {
-				
-				/*foreach (RunSession s in RunSessions) {	
-					var hbox = this.BuildRunEvent (s);
-					hbox.Show();
-					this.eventDetail.PackStart (hbox, true, false, 5);
-				}*/
-
 				var runVbox = this.buildRunsForDay (RunSessions);
 				runVbox.ShowAll ();
 				this.eventDetail.PackStart (runVbox, true, false, 5);
@@ -93,6 +82,11 @@ namespace calendar
 				statsVbox.ShowAll ();
 				this.eventDetail.PackStart (statsVbox, true, false, 5);
 			}
+
+			bIntroducir = new Gtk.Button ("Create session");
+			bIntroducir.Show ();
+			this.eventDetail.PackStart (bIntroducir, true, false, 5);
+			this.bIntroducir.Clicked += (o, args) => this.showAddSession();
 		}
 	
 		private void showAddSession(){
@@ -100,12 +94,11 @@ namespace calendar
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
 			if (result == Gtk.ResponseType.Accept) {
 				addWindow.getSessionData ();
-				var date = addWindow.GetDate ();
+
+				var date = this.ToEpochTime(this.cal.Date);
 				var distance = addWindow.GetDistance ();
 				var time = addWindow.GetTime ();
 				this.addSession (date, time, distance);
-
-				//añadir al json
 			}
 			addWindow.Destroy ();
 		}
@@ -309,5 +302,11 @@ namespace calendar
 			treeView.HeadersClickable = true;
 			return treeView;
 		}
+
+		private long ToEpochTime(DateTime date)
+		{
+			var epoch = new DateTime (1970,1,1,0,0,0,DateTimeKind.Utc);
+			return Convert.ToInt64 ((date - epoch).TotalSeconds);
+		}	
 	}	
 }

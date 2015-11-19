@@ -11,7 +11,7 @@ namespace calendar
 		{
 		}
 
-		public int start;
+		public long start;
 		public long duration;
 		public long distance;
 	}

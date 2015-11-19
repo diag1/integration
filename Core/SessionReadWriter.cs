@@ -19,7 +19,7 @@ namespace calendar
 			}
 		}
 
-		public static List<RunSession> ToRunSessions(StreamReader r) {
+		public static List<RunSession> ToJson(StreamReader r) {
 			string json = r.ReadToEnd ();
 			return JsonConvert.DeserializeObject<List<RunSession>> (json);
 		} 
