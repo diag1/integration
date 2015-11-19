@@ -46,7 +46,12 @@
     <Compile Include="Core\Functions.cs" />
     <Compile Include="View\MainWindowCoreStats.cs" />
     <Compile Include="View\MainWindowViewStats.cs" />
+<<<<<<< HEAD
     <Compile Include="Core\SessionReadWriter.cs" />
+=======
+    <Compile Include="View\AddWindowView.cs" />
+    <Compile Include="View\AddWindowCore.cs" />
+>>>>>>> metemeto
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

@@ -94,9 +94,12 @@ namespace calendar
 		/// </summary>
 		private Gtk.VBox buildStatsForDay(){
 			dia = this.cal.Date;
+			bIntroducir = new Gtk.Button ("Introduce");
 			var vBoxDia = new Gtk.VBox (false, 5);
 			var tableStats = getStatsTreeView (false);
 			vBoxDia.PackStart(tableStats,true,false,5);
+			vBoxDia.PackStart(bIntroducir,true,false,5);
+
 			return vBoxDia;
 		}
 
@@ -110,7 +113,7 @@ namespace calendar
 			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
-	
+		private Gtk.Button bIntroducir;
 		private DateTime dia;
 		private Gtk.HBox bottomHBox;
 		private Gtk.VBox calendarVbox;
