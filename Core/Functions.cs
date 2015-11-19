@@ -7,7 +7,7 @@ namespace calendar
 	public class Functions:Fachada
 	{
 		private List<RunSession> lst;
-		private Reader red;
+		private SessionReadWriter red;
 		private String rout;
 		public Functions (List<RunSession> list){
 			this.lst = list;

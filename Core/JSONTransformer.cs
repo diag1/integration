@@ -20,6 +20,13 @@ namespace calendar
 			string json = r.ReadToEnd ();
 			return JsonConvert.DeserializeObject<List<RunSession>> (json);
 		} 
+
+		public static void ToJSON(List<RunSession> lst) {
+			string output = JsonConvert.SerializeObject(lst);
+			System.Console.WriteLine (output);
+
+			File.WriteAllText ("./data.json", output);
+		}
 	}
 
 }

@@ -5,12 +5,11 @@ using Newtonsoft.Json;
 
 namespace calendar
 {	
-	public interface Reader {
-		List<RunSession> Read (String fn);
-	}
-	public class JSONReader :Reader
+	
+	public class SessionReadWriter
 	{
 		private List<RunSession> lst;
+
 
 		public List<RunSession> Read (String fn){
 			using (StreamReader r = new StreamReader (fn)) {
@@ -19,6 +18,11 @@ namespace calendar
 				return this.lst;
 			}
 		}
+
+		public static List<RunSession> ToRunSessions(StreamReader r) {
+			string json = r.ReadToEnd ();
+			return JsonConvert.DeserializeObject<List<RunSession>> (json);
+		} 
 		
 	}
 }
