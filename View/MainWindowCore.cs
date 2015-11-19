@@ -68,9 +68,14 @@ namespace calendar
 			var RunSessions = this.runFilter.GetEventsForDay(this.cal.Day);
 
 			if (RunSessions.Count == 0 ) {
+				bIntroducir = new Gtk.Button ("Introduce");
 				var label = new Gtk.Label ("No events for this day");
 				label.Show ();
+				bIntroducir.Show ();
 				this.eventDetail.PackStart (label, true, false, 5);
+				this.eventDetail.PackStart (bIntroducir, true, false, 5);
+				//events
+				this.bIntroducir.Clicked += (o, args) => this.showAddSession();
 
 			} else {
 				
@@ -90,7 +95,18 @@ namespace calendar
 			}
 		}
 	
-
+		private void showAddSession(){
+			var addWindow = new AddWindowView (this);
+			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
+			if (result == Gtk.ResponseType.Accept) {
+				var date = addWindow.GetDate ();
+				var distance = addWindow.GetDistance ();
+				var time = addWindow.GetTime ();
+				Console.WriteLine (date);
+				//añadir al json
+			}
+			addWindow.Destroy ();
+		}
 		/// <summary>
 		/// Ises the date.
 		/// </summary>
@@ -140,8 +156,6 @@ namespace calendar
 					column = new Gtk.TreeViewColumn();
 					column.Expand = true;
 					cell = new Gtk.CellRendererText();
-					//column.Title = colNum == 0 ? "Value"//REVISAR ESTO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					//	: colNum == 1 ? "Destination" : "Kms";
 					column.PackStart( cell, true );
 					cell.Editable = false;
 					column.AddAttribute( cell, "text", colNum + 1 );

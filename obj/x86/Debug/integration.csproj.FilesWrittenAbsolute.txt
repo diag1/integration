@@ -4,3 +4,8 @@
 /Users/labkode/Projects/integration/bin/Debug/integration.exe
 /Users/labkode/Projects/integration/obj/x86/Debug/integration.exe
 /Users/labkode/Projects/integration/obj/x86/Debug/integration.exe.mdb
+/home/alumno/davidstats/integration/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/alumno/davidstats/integration/bin/Debug/integration.exe.mdb
+/home/alumno/davidstats/integration/bin/Debug/integration.exe
+/home/alumno/davidstats/integration/obj/x86/Debug/integration.exe
+/home/alumno/davidstats/integration/obj/x86/Debug/integration.exe.mdb
