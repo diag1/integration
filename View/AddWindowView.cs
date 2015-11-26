@@ -17,7 +17,12 @@ namespace calendar
 			SetDefaultSize(250, 200);
 			vBoxMain = this.VBox;
 			//widgets
-			this.lb1 = new Gtk.Label("New run session");
+			this.lb1 = new Gtk.Label("NEW RUN SESSION");
+
+			this.lb2 = new Gtk.Label("Start time (hh:mm):");
+			this.en4 = new Gtk.Entry("0");
+			this.en4.Alignment = 1;
+
 
 			this.lb3 = new Gtk.Label("Distance (meters):");
 			this.en2 = new Gtk.Entry("0");
@@ -34,6 +39,10 @@ namespace calendar
 
 			//vBox
 			vBoxMain.PackStart(this.lb1,true,false,5);
+
+			//Start time
+			vBoxMain.PackStart(this.lb2,true,false,5);
+			vBoxMain.PackStart(this.en4,true,false,5);
 
 			//Distance
 			vBoxMain.PackStart(this.lb3,true,false,5);
@@ -53,8 +62,10 @@ namespace calendar
 
 		private Gtk.Entry en2;
 		private Gtk.Entry en3;
+		private Gtk.Entry en4;
 
 		private Gtk.Label lb1;
+		private Gtk.Label lb2;
 		private Gtk.Label lb3;
 		private Gtk.Label lb5;
 		private Gtk.Label lb6;
@@ -65,6 +76,7 @@ namespace calendar
 		private long date;
 		private long time;
 		private long distance;
+		private DateTime start;
 
 	}
 
