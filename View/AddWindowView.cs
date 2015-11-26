@@ -6,6 +6,7 @@ namespace calendar
 	{
 		public AddWindowView (Gtk.Window main)
 		{
+			start = new DateTime ();
 			this.TransientFor = main;
 			this.Build ();
 		}

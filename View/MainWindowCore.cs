@@ -94,8 +94,12 @@ namespace calendar
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
 			if (result == Gtk.ResponseType.Accept) {
 				addWindow.getSessionData ();
-
-				var date = this.ToEpochTime(this.cal.Date);
+				/////////MIRAR ESTO! (en el addWindow metemos la hora de inicio de la sesion sin embargo luego no se almacena)
+				var date1 = this.cal.Date;
+				date1.AddHours ( FromUnixTime(addWindow.GetStart ()).Hour);///Comprobar si esto es solucion =)
+				date1.AddMinutes (FromUnixTime(addWindow.GetStart ()).Minute);
+				Console.Write (FromUnixTime (addWindow.GetStart ()).Minute);
+				var date=this.ToEpochTime(date1);
 				var distance = addWindow.GetDistance ();
 				var time = addWindow.GetTime ();
 				this.addSession (date, time, distance);
@@ -262,7 +266,7 @@ namespace calendar
 			// Create runned column
 			var columnRunned = new Gtk.TreeViewColumn ();
 			var cellRunned = new Gtk.CellRendererText ();
-			columnRunned.Title = "Runned";
+			columnRunned.Title = "Distance";
 			columnRunned.PackStart (cellRunned, true);
 			cellRunned.Editable = false;
 			cellRunned.Foreground = "black";
@@ -273,7 +277,7 @@ namespace calendar
 			// Create distance column
 			var columnDistance = new Gtk.TreeViewColumn ();
 			var cellDistance = new Gtk.CellRendererText ();
-			columnDistance.Title = "Distance";
+			columnDistance.Title = "Runned";
 			columnDistance.PackStart (cellDistance, true);
 			cellDistance.Editable = false;
 			cellDistance.Foreground = "black";
@@ -285,10 +289,12 @@ namespace calendar
 			foreach (RunSession s in sessions) {
 				// Insert data
 				row.Clear ();
-
+				////////////////////////AKIIIIIIIIIII
+				/// 
 				var date = this.runFilter.FromUnixTime (s.start);
+				Console.Write ("date "+date.ToString ());
 				var hour = date.Hour + ":" + date.Minute + ":" + date.Second;
-				var distance = s.distance + " kms";
+				var distance = s.distance + " m";
 				var duration = TimeSpan.FromSeconds (s.duration).ToString (@"hh\:mm\:ss");
 
 				row.Insert (0, Convert.ToString (hour));
@@ -308,5 +314,11 @@ namespace calendar
 			var epoch = new DateTime (1970,1,1,0,0,0,DateTimeKind.Utc);
 			return Convert.ToInt64 ((date - epoch).TotalSeconds);
 		}	
+		private  DateTime FromUnixTime(long unixTime)
+		{
+			var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+			return epoch.AddSeconds(unixTime);
+		}
+
 	}	
 }
