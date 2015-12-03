@@ -120,7 +120,4 @@ namespace calendar
 		private Gtk.Calendar cal;
 		private Fachada fa;
 	}
-
-
-
 }

@@ -1,13 +1,16 @@
 ﻿<Properties StartupItem="integration.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="View/AddWindowCore.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="View/MainWindowCore.cs">
     <Files>
-      <File FileName="View/AddWindowCore.cs" Line="34" Column="4" />
-      <File FileName="View/AddWindowView.cs" Line="65" Column="3" />
+      <File FileName="View/AddWindowCore.cs" Line="16" Column="13" />
+      <File FileName="Core/SessionReadWriter.cs" Line="1" Column="1" />
+      <File FileName="View/MainWindowCore.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/ruben/Projects/integration/View/AddWindowCore.cs" line="25" column="4" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using System.Globalization;
 //using System.Text.RegularExpressions;
 namespace calendar
@@ -22,7 +22,7 @@ namespace calendar
 		{
 			string start1 = this.en4.Text;
 			var distanceEntry = this.en2.Text;
-			var timeEntry = this.en3.Text;		
+			var timeEntry = this.en3.Text;
 
 			string[] times = start1.Split (':');
 
@@ -41,9 +41,5 @@ namespace calendar
 			var epoch = new DateTime (1970,1,1,0,0,0,DateTimeKind.Utc);
 			return Convert.ToInt64 ((date - epoch).TotalSeconds);
 		}
-			
-
-
-
 	}
 }
