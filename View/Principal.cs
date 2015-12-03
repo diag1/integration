@@ -11,15 +11,9 @@ namespace calendar
 	{
 		public static void Main() {
 
-			string jsonRuns = @"[
-			{""start"":1446133195,""duration"":3600, ""distance"":200},
-			{""start"":1444923595,""duration"":100, ""distance"":400},
-			{""start"":1444925595,""duration"":1400, ""distance"":1100}
-			]";
-			
+			string text = System.IO.File.ReadAllText(@"./data.json");
 
-
-			var r = new StreamReader (GenerateStreamFromString (jsonRuns));
+			var r = new StreamReader (GenerateStreamFromString (text));
 			var runSessionList = JSONTransformer.ToRunSessions (r);
 
 			Gtk.Application.Init();

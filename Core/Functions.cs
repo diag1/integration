@@ -7,8 +7,7 @@ namespace calendar
 	public class Functions:Fachada
 	{
 		private List<RunSession> lst;
-		private SessionReadWriter red;
-		private String rout;
+
 		public Functions (List<RunSession> list){
 			this.lst = list;
 		}
@@ -25,7 +24,7 @@ namespace calendar
 					med += k.distance;
 				}
 			}
-			return Convert.ToString(med);
+			return Convert.ToString(med) + " m";
 		}
 		/// <summary>
 		/// Gets the dist tot.
@@ -39,7 +38,7 @@ namespace calendar
 		/// </summary>
 		/// <returns>The vel med total on m/s.</returns>
 		public String getVelMedTot(){
-			String toret = Convert.ToString (getDistTotIn () / getDurTot ())+"m/s";
+			String toret = Convert.ToString (Math.Round(getDistTotIn () / 1000 / getDurTot () /3600, 2))+" km/h";
 			return toret;
 		}
 		/// <summary>
@@ -48,8 +47,8 @@ namespace calendar
 		/// <returns>The vel med day.</returns>
 		/// <param name="day">Day.</param>
 		public String getVelMedDay(DateTime fecha){
-			long dur = 0;
-			long dist = 0;
+			float dur = 0;
+			float dist = 0;
 			foreach(RunSession k in lst){
 				DateTime f = FromUnixTime (k.start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
@@ -57,7 +56,7 @@ namespace calendar
 					dist += k.distance;
 				}
 			}
-			return Convert.ToString(dist / dur);
+			return Convert.ToString(Math.Round( (dist / 1000.0) / (dur / 3600.0), 2)) + " km/h";
 		}
 		/// <summary>
 		/// Gets the number stps tot.
@@ -69,7 +68,7 @@ namespace calendar
 			foreach(RunSession k in lst){
 				med+= k.distance/distStep;
 			}
-			return Convert.ToString(med);
+			return Convert.ToString(Math.Round(med));
 		}
 		/// <summary>
 		/// Gets the number stps day.
@@ -85,7 +84,7 @@ namespace calendar
 					med+= k.distance/distStep;
 				}
 			}
-			return Convert.ToString(med);
+			return Convert.ToString(Math.Round(med));
 		}
 		/// <summary>
 		/// Calculate Total Num of Hours
@@ -125,15 +124,20 @@ namespace calendar
 		/// <returns>The number hour of this day.</returns>
 		/// <param name="day">Day.</param>
 		public String getNumHourDay(DateTime fecha){
-			String toret="0";
+			long duration = 0;
 			foreach(RunSession k in lst){
 				DateTime f = FromUnixTime (k.start);
-				DateTime w = FromUnixTime (k.duration);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					toret=w.Hour+"h "+w.Minute+"m "+w.Second+"s";
+					duration += k.duration;
 				}
 			}
+
+			return TimeSpan.FromSeconds (duration).ToString (@"hh\h\ mm\m\ ss\s");
+
+			/*var datetime = this.FromUnixTime (duration);
+			string toret = datetime.Hour + "h " + datetime.Minute + "m " + datetime.Second + "s ";
 			return toret;
+			*/
 		}
 	
 		/// <summary>

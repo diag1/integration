@@ -18,7 +18,11 @@ namespace calendar
 		/// <param name="r">The reader.</param>
 		public static List<RunSession> ToRunSessions(StreamReader r) {
 			string json = r.ReadToEnd ();
-			return JsonConvert.DeserializeObject<List<RunSession>> (json);
+			var sessions = JsonConvert.DeserializeObject<List<RunSession>> (json);
+			if (sessions == null) {
+				sessions = new List<RunSession> ();
+			}
+			return sessions;
 		} 
 
 		public static void ToJson(List<RunSession> lst) {

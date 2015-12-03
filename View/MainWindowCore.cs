@@ -93,16 +93,20 @@ namespace calendar
 			var addWindow = new AddWindowView (this);
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
 			if (result == Gtk.ResponseType.Accept) {
+				// Collect data
 				addWindow.getSessionData ();
-				/////////MIRAR ESTO! (en el addWindow metemos la hora de inicio de la sesion sin embargo luego no se almacena)
-				var date1 = this.cal.Date;
-				date1.AddHours ( FromUnixTime(addWindow.GetStart ()).Hour);///Comprobar si esto es solucion =)
-				date1.AddMinutes (FromUnixTime(addWindow.GetStart ()).Minute);
-				Console.Write (FromUnixTime (addWindow.GetStart ()).Minute);
-				var date=this.ToEpochTime(date1);
+
+
+				var currentDate = this.cal.Date;
+				currentDate = currentDate.AddSeconds (addWindow.GetStart ());
+
+				Console.WriteLine (currentDate);
+
 				var distance = addWindow.GetDistance ();
 				var time = addWindow.GetTime ();
-				this.addSession (date, time, distance);
+
+				this.addSession (this.ToEpochTime(currentDate), time, distance);
+				this.ShowEventsForDay ();
 			}
 			addWindow.Destroy ();
 		}
@@ -114,6 +118,7 @@ namespace calendar
 			this.RunSessions.Add (session);
 			JSONTransformer.ToJson (this.RunSessions);
 		}
+
 		/// <summary>
 		/// Ises the date.
 		/// </summary>
@@ -255,7 +260,7 @@ namespace calendar
 			// Create started column
 			var columnStarted = new Gtk.TreeViewColumn ();
 			var cellStarted = new Gtk.CellRendererText ();
-			columnStarted.Title = "Started";
+			columnStarted.Title = "Started (hh:mm:ss)";
 			columnStarted.PackStart (cellStarted, true);
 			cellStarted.Editable = false;
 			cellStarted.Foreground = "black";
@@ -266,7 +271,7 @@ namespace calendar
 			// Create runned column
 			var columnRunned = new Gtk.TreeViewColumn ();
 			var cellRunned = new Gtk.CellRendererText ();
-			columnRunned.Title = "Distance";
+			columnRunned.Title = "Distance (m)";
 			columnRunned.PackStart (cellRunned, true);
 			cellRunned.Editable = false;
 			cellRunned.Foreground = "black";
@@ -277,7 +282,7 @@ namespace calendar
 			// Create distance column
 			var columnDistance = new Gtk.TreeViewColumn ();
 			var cellDistance = new Gtk.CellRendererText ();
-			columnDistance.Title = "Runned";
+			columnDistance.Title = "Runned (hh:mm:ss)";
 			columnDistance.PackStart (cellDistance, true);
 			cellDistance.Editable = false;
 			cellDistance.Foreground = "black";
@@ -294,7 +299,7 @@ namespace calendar
 				var date = this.runFilter.FromUnixTime (s.start);
 				Console.Write ("date "+date.ToString ());
 				var hour = date.Hour + ":" + date.Minute + ":" + date.Second;
-				var distance = s.distance + " m";
+				var distance = s.distance;
 				var duration = TimeSpan.FromSeconds (s.duration).ToString (@"hh\:mm\:ss");
 
 				row.Insert (0, Convert.ToString (hour));

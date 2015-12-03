@@ -6,7 +6,6 @@ namespace calendar
 	{
 		public AddWindowView (Gtk.Window main)
 		{
-			start = new DateTime ();
 			this.TransientFor = main;
 			this.Build ();
 		}
@@ -31,12 +30,7 @@ namespace calendar
 
 			this.lb5 = new Gtk.Label("Time (minutes) :");
 			this.en3 = new Gtk.Entry("0");
-
-
 			this.en3.Alignment = 1;
-			this.lb6 = new Gtk.Label("Average speed :");
-			this.lb7 = new Gtk.Label("");
-
 
 			//vBox
 			vBoxMain.PackStart(this.lb1,true,false,5);
@@ -77,8 +71,6 @@ namespace calendar
 		private long date;
 		private long time;
 		private long distance;
-		private DateTime start;
-
 	}
 
 }

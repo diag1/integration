@@ -14,32 +14,29 @@ namespace calendar
 		}
 			
 		public long GetStart(){
-			Console.Write ("hora "+start.Hour);
-			return ToEpochTime(this.start);
+			return this.start;
 		}
+
+		private int start;
 
 		public void getSessionData ()
 		{
-			string start1 = this.en4.Text;
+			string initEntry = this.en4.Text;
 			var distanceEntry = this.en2.Text;
 			var timeEntry = this.en3.Text;
 
-			string[] times = start1.Split (':');
+			string[] hoursAndMinutes = initEntry.Split (':');
 
-			var startMin = Convert.ToDouble(times[1]);
-			var startHour = Convert.ToDouble(times[0]);
+			var minutes = Convert.ToInt32(hoursAndMinutes[1]);
+			var hours = Convert.ToInt32(hoursAndMinutes[0]);
+			var seconds = hours * 3600 + minutes * 60;
+
+			this.start = seconds;
 
 			this.distance = int.Parse(distanceEntry);
 			this.time = 60 * Convert.ToInt64 (timeEntry);
-			//PROBLEMA LOCALIZADO (no realiza bien el add)
-			this.start.AddMinutes (startMin);
-			this.start.AddHours (startHour);
-			Console.WriteLine ("miramos aki2" + this.start.ToString ());
+				
 		}
-		private long ToEpochTime(DateTime date)
-		{
-			var epoch = new DateTime (1970,1,1,0,0,0,DateTimeKind.Utc);
-			return Convert.ToInt64 ((date - epoch).TotalSeconds);
-		}
+
 	}
 }

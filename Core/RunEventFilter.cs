@@ -8,10 +8,10 @@ namespace calendar
 	/// </summary>
 	public class RunEventFilter
 	{
-		private List<RunSession> RunRunRunRunSessions;
-		public RunEventFilter (List<RunSession> RunRunRunRunSessions)
+		private List<RunSession> RunSessions;
+		public RunEventFilter (List<RunSession> RunSessions)
 		{
-			this.RunRunRunRunSessions = RunRunRunRunSessions;	
+			this.RunSessions = RunSessions;	
 		}
 
 		/// <summary>
@@ -25,15 +25,12 @@ namespace calendar
 
 			List<RunSession> toret = new List<RunSession> ();
 
-			foreach (RunSession s in this.RunRunRunRunSessions) {
+			foreach (RunSession s in this.RunSessions) {
 				var date = this.FromUnixTime (s.start);
-				System.Console.WriteLine ("MonthIN=" + month + " MonthOUT=" + date.Month);
 				if (date.Month == month) {
 					toret.Add (s);
 				}
 			}
-
-			System.Console.WriteLine ("Number of month RunRunRunRunSessions = " + toret.Count);
 			return toret;
 		}
 
@@ -48,15 +45,12 @@ namespace calendar
 
 			List<RunSession> toret = new List<RunSession> ();
 
-			foreach (RunSession s in this.RunRunRunRunSessions) {
+			foreach (RunSession s in this.RunSessions) {
 				var date = this.FromUnixTime (s.start);
-				System.Console.WriteLine ("DayIN=" + day + " DayOUT=" + date.Day);
 				if (date.Day == day) {
 					toret.Add (s);
 				}
 			}
-
-			System.Console.WriteLine ("Number of day RunRunRunRunSessions = " + toret.Count);
 			return toret;
 		}
 
