@@ -13,6 +13,7 @@ namespace calendar
 
 			Transformer transformer = new JSONTransformer ("./data.json");
 			var runSessionList = transformer.GetRunSessions ();
+
 			Gtk.Application.Init();
 			var wMain = new MainWindow (runSessionList, transformer);
 			wMain.ShowAll ();

@@ -21,6 +21,7 @@ namespace calendar
 		/// <param name="month">Month.</param>
 		public List<RunSession> GetEventsForMonth(int month) {
 
+			// months are zreo based
 			month = month + 1;
 
 			List<RunSession> toret = new List<RunSession> ();
