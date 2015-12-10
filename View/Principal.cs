@@ -11,25 +11,13 @@ namespace calendar
 	{
 		public static void Main() {
 
-			string text = System.IO.File.ReadAllText(@"./data.json");
-
-			var r = new StreamReader (GenerateStreamFromString (text));
-			var runSessionList = JSONTransformer.ToRunSessions (r);
-
+			Transformer transformer = new JSONTransformer ("./data.json");
+			var runSessionList = transformer.GetRunSessions ();
 			Gtk.Application.Init();
-			var wMain = new MainWindow (runSessionList);
+			var wMain = new MainWindow (runSessionList, transformer);
 			wMain.ShowAll ();
 			Gtk.Application.Run ();
 		}
 
-		private static Stream GenerateStreamFromString(string s)
-		{
-			MemoryStream stream = new MemoryStream();
-			StreamWriter writer = new StreamWriter(stream);
-			writer.Write(s);
-			writer.Flush();
-			stream.Position = 0;
-			return stream;
-		}
 	}
 }

@@ -26,7 +26,7 @@ namespace calendar
 			List<RunSession> toret = new List<RunSession> ();
 
 			foreach (RunSession s in this.RunSessions) {
-				var date = this.FromUnixTime (s.start);
+				var date = this.FromUnixTime (s.Start);
 				if (date.Month == month) {
 					toret.Add (s);
 				}
@@ -46,7 +46,7 @@ namespace calendar
 			List<RunSession> toret = new List<RunSession> ();
 
 			foreach (RunSession s in this.RunSessions) {
-				var date = this.FromUnixTime (s.start);
+				var date = this.FromUnixTime (s.Start);
 				if (date.Day == day) {
 					toret.Add (s);
 				}

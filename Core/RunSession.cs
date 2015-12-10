@@ -7,12 +7,9 @@ namespace calendar
 	/// </summary>
 	public class RunSession
 	{
-		public RunSession ()
-		{
-		}
-
-		public long start;
-		public long duration;
-		public long distance;
+		
+		public long Start { get; set;}
+		public long Duration { get; set;}
+		public long Distance { get; set;}
 	}
 }

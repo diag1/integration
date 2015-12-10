@@ -25,34 +25,9 @@ namespace calendar
 
 			// Mark days in the calendar where an event has ocurred
 			foreach (RunSession s in this.runFilter.GetEventsForMonth(month)) {
-				var day = (uint)(runFilter.FromUnixTime (s.start).Day);
+				var day = (uint)(runFilter.FromUnixTime (s.Start).Day);
 				this.cal.MarkDay (day);
 			}
-		}
-
-
-		private void ShowAddTrip() {
-			/*var addWindow = new AddWindow (this);
-			Gtk.ResponseType result = (Gtk.ResponseType)addWindow.Run ();
-
-			if (result == Gtk.ResponseType.Accept) {
-				var origin = addWindow.GetOrigin ();
-				var dst = addWindow.GetDestination ();
-				var kms = addWindow.GetKMS ();
-				this.rds.Add(Recorrido.Crea (origin, dst, kms));
-				this.rds.GuardaXml ();
-			}
-			addWindow.Destroy ();
-			*/
-		}
-
-
-		private  void ShowListTrips() {
-			/*
-			var listWindow = new ListWindow (this, this.rds);
-			Gtk.ResponseType result = (Gtk.ResponseType)listWindow.Run ();
-			listWindow.Destroy ();
-			*/
 		}
 
 		/// <summary>
@@ -89,6 +64,9 @@ namespace calendar
 			this.bIntroducir.Clicked += (o, args) => this.showAddSession();
 		}
 	
+		/// <summary>
+		/// Shows the add session.
+		/// </summary>
 		private void showAddSession(){
 			var addWindow = new AddWindowView (this);
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
@@ -110,13 +88,20 @@ namespace calendar
 			}
 			addWindow.Destroy ();
 		}
+
+		/// <summary>
+		/// Adds the session.
+		/// </summary>
+		/// <param name="date">Date.</param>
+		/// <param name="time">Time.</param>
+		/// <param name="distance">Distance.</param>
 		private void addSession(long date, long time, long distance){
 			var session = new RunSession ();
-			session.start = date;
-			session.duration = time;
-			session.distance = distance;
+			session.Start = date;
+			session.Duration = time;
+			session.Distance = distance;
 			this.RunSessions.Add (session);
-			JSONTransformer.ToJson (this.RunSessions);
+			this.trans.WriteToDataFormat (this.RunSessions);
 		}
 
 		/// <summary>
@@ -296,11 +281,11 @@ namespace calendar
 				row.Clear ();
 				////////////////////////AKIIIIIIIIIII
 				/// 
-				var date = this.runFilter.FromUnixTime (s.start);
+				var date = this.runFilter.FromUnixTime (s.Start);
 				Console.Write ("date "+date.ToString ());
 				var hour = date.Hour + ":" + date.Minute + ":" + date.Second;
-				var distance = s.distance;
-				var duration = TimeSpan.FromSeconds (s.duration).ToString (@"hh\:mm\:ss");
+				var distance = s.Distance;
+				var duration = TimeSpan.FromSeconds (s.Duration).ToString (@"hh\:mm\:ss");
 
 				row.Insert (0, Convert.ToString (hour));
 				row.Insert (1, Convert.ToString (distance));
@@ -314,16 +299,28 @@ namespace calendar
 			return treeView;
 		}
 
+		/// <summary>
+		/// Tos the epoch time.
+		/// </summary>
+		/// <returns>The epoch time.</returns>
+		/// <param name="date">Date.</param>
 		private long ToEpochTime(DateTime date)
 		{
 			var epoch = new DateTime (1970,1,1,0,0,0,DateTimeKind.Utc);
 			return Convert.ToInt64 ((date - epoch).TotalSeconds);
 		}	
+
+		/// <summary>
+		/// Froms the unix time.
+		/// </summary>
+		/// <returns>The unix time.</returns>
+		/// <param name="unixTime">Unix time.</param>
 		private  DateTime FromUnixTime(long unixTime)
 		{
 			var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 			return epoch.AddSeconds(unixTime);
 		}
 
+		private Transformer trans;
 	}	
 }

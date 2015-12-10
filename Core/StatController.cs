@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace calendar
 {
-	public class Functions:Fachada
+	public class StatController:Stats
 	{
 		private List<RunSession> lst;
 
-		public Functions (List<RunSession> list){
+		public StatController (List<RunSession> list){
 			this.lst = list;
 		}
 		/// <summary>
@@ -19,9 +19,9 @@ namespace calendar
 		public String getDistDay(DateTime fecha){
 			double med=0.0;
 			foreach(RunSession k in lst){
-				DateTime f = FromUnixTime (k.start);
+				DateTime f = FromUnixTime (k.Start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					med += k.distance;
+					med += k.Distance;
 				}
 			}
 			return Convert.ToString(med) + " m";
@@ -50,10 +50,10 @@ namespace calendar
 			float dur = 0;
 			float dist = 0;
 			foreach(RunSession k in lst){
-				DateTime f = FromUnixTime (k.start);
+				DateTime f = FromUnixTime (k.Start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					dur+= k.duration;
-					dist += k.distance;
+					dur+= k.Duration;
+					dist += k.Distance;
 				}
 			}
 			return Convert.ToString(Math.Round( (dist / 1000.0) / (dur / 3600.0), 2)) + " km/h";
@@ -66,7 +66,7 @@ namespace calendar
 			double distStep=0.6;
 			double med = 0;
 			foreach(RunSession k in lst){
-				med+= k.distance/distStep;
+				med+= k.Distance/distStep;
 			}
 			return Convert.ToString(Math.Round(med));
 		}
@@ -79,9 +79,9 @@ namespace calendar
 			double distStep=0.6;
 			double med = 0;
 			foreach(RunSession k in lst){
-				DateTime f = FromUnixTime (k.start);
+				DateTime f = FromUnixTime (k.Start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					med+= k.distance/distStep;
+					med+= k.Distance/distStep;
 				}
 			}
 			return Convert.ToString(Math.Round(med));
@@ -98,7 +98,7 @@ namespace calendar
 			int sec = 0;
 			DateTime f;
 			foreach(RunSession k in lst){
-				f = FromUnixTime (k.duration);
+				f = FromUnixTime (k.Duration);
 				sec += f.Second;
 				if (sec >= 60) {
 					sec=sec - 60;
@@ -126,9 +126,9 @@ namespace calendar
 		public String getNumHourDay(DateTime fecha){
 			long duration = 0;
 			foreach(RunSession k in lst){
-				DateTime f = FromUnixTime (k.start);
+				DateTime f = FromUnixTime (k.Start);
 				if (f.Year.Equals(fecha.Year)&&f.Month.Equals(fecha.Month)&&f.Day.Equals(fecha.Day)) {
-					duration += k.duration;
+					duration += k.Duration;
 				}
 			}
 
@@ -148,7 +148,7 @@ namespace calendar
 		private double getDurTot(){
 			double toret=0;
 			foreach(RunSession k in lst){
-				toret+= k.duration;
+				toret+= k.Duration;
 			}
 			return toret;
 		}
@@ -160,7 +160,7 @@ namespace calendar
 		private double getDistTotIn(){
 			double toret=0;
 			foreach(RunSession k in lst){
-				toret+= k.distance;
+				toret+= k.Distance;
 			}
 			return toret;
 		}

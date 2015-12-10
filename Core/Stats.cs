@@ -5,7 +5,7 @@ namespace calendar
 	/// <summary>
 	/// Fachada is an interface that contains methods for getting statistics.
 	/// </summary>
-	public interface Fachada
+	public interface Stats
 	{	
 		String getDistTot();
 		String getDistDay(DateTime fecha);

@@ -12,12 +12,13 @@ namespace calendar
 
 		public RunEventFilter runFilter;
 
-		public MainWindow (List<RunSession> RunSessions)
+		public MainWindow (List<RunSession> RunSessions, Transformer trans)
 			:base(Gtk.WindowType.Toplevel)
 		{
+			this.trans = trans;
 			this.RunSessions = RunSessions;
 			this.runFilter = new RunEventFilter (this.RunSessions);
-			this.fa = new Functions(this.RunSessions);
+			this.fa = new StatController(this.RunSessions);
 			this.Build();
 		}
 
@@ -29,10 +30,10 @@ namespace calendar
 		private Gtk.HBox BuildRunEvent(RunSession s) {
 
 			var hbox = new Gtk.HBox(true, 5);
-			var date = this.runFilter.FromUnixTime (s.start);
+			var date = this.runFilter.FromUnixTime (s.Start);
 			var labelHour = new Gtk.Label ("Started: " + date.Hour + ":" + date.Minute + ":" + date.Second);
-			var labelDistance = new Gtk.Label ("Runned: " + s.distance + " kms");
-			var labelDuration = new Gtk.Label ("Duration: " + TimeSpan.FromSeconds(s.duration).ToString(@"hh\:mm\:ss"));
+			var labelDistance = new Gtk.Label ("Runned: " + s.Distance + " kms");
+			var labelDuration = new Gtk.Label ("Duration: " + TimeSpan.FromSeconds(s.Duration).ToString(@"hh\:mm\:ss"));
 	
 			labelHour.Show ();
 			labelDistance.Show ();
@@ -112,12 +113,13 @@ namespace calendar
 			vBoxMain.PackStart(tableStats,true,false,5);
 			return vBoxMain;
 		}
+
 		private Gtk.Button bIntroducir;
 		private DateTime dia;
 		private Gtk.HBox bottomHBox;
 		private Gtk.VBox calendarVbox;
 		private Gtk.VBox eventDetail;
 		private Gtk.Calendar cal;
-		private Fachada fa;
+		private Stats fa;
 	}
 }
