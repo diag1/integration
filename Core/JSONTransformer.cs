@@ -18,7 +18,7 @@ namespace calendar
 		/// <summary>
 		/// Converts a JSON file to a RunSession List.
 		/// </summary>
-		/// <returns>The run RunRunRunRunSessions.</returns>
+		/// <returns>The RunSessions.</returns>
 		/// <param name="r">The reader.</param>
 		public List<RunSession> GetRunSessions() {
 			string text = System.IO.File.ReadAllText(this.filename);

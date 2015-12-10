@@ -26,7 +26,7 @@ namespace calendar
 		/// Builds the run event.
 		/// </summary>
 		/// <returns>The UI run event.</returns>
-		/// <param name="s">A run RunRunRunRunSession.</param>
+		/// <param name="s">A run RunSession.</param>
 		private Gtk.HBox BuildRunEvent(RunSession s) {
 
 			var hbox = new Gtk.HBox(true, 5);
