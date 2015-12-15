@@ -21,14 +21,21 @@ namespace calendar
 		/// <returns>The RunSessions.</returns>
 		/// <param name="r">The reader.</param>
 		public List<RunSession> GetRunSessions() {
-			string text = System.IO.File.ReadAllText(this.filename);
-			var r = new StreamReader (this.GenerateStreamFromString (text));
-			string json = r.ReadToEnd ();
-			var sessions = JsonConvert.DeserializeObject<List<RunSession>> (json);
-			if (sessions == null) {
-				sessions = new List<RunSession> ();
+			try {
+				string text = System.IO.File.ReadAllText(this.filename);
+				var r = new StreamReader (this.GenerateStreamFromString (text));
+				string json = r.ReadToEnd ();
+				var sessions = JsonConvert.DeserializeObject<List<RunSession>> (json);
+				if (sessions == null) {
+					sessions = new List<RunSession> ();
+				}
+				return sessions;
+			} catch (FileNotFoundException e) {
+				using (File.Create(this.filename)) {}
+				return this.GetRunSessions ();
 			}
-			return sessions;
+				
+				
 		} 
 
 		/// <summary>
