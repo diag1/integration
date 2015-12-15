@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using System.IO;
 using System.Collections.Generic;
+using Gtk;
 
 namespace calendar
 {
@@ -28,6 +29,7 @@ namespace calendar
 				var day = (uint)(runFilter.FromUnixTime (s.Start).Day);
 				this.cal.MarkDay (day);
 			}
+			this.ShowEventsForDay ();
 		}
 
 		/// <summary>
@@ -72,21 +74,29 @@ namespace calendar
 			Gtk.ResponseType result	= (Gtk.ResponseType)addWindow.Run ();
 			if (result == Gtk.ResponseType.Accept) {
 				// Collect data
-				addWindow.getSessionData ();
+
+				try {
+					addWindow.getSessionData ();
+					var currentDate = this.cal.Date;
+					currentDate = currentDate.AddSeconds (addWindow.GetStart ());
+
+					var distance = addWindow.GetDistance ();
+					var time = addWindow.GetTime ();
 
 
-				var currentDate = this.cal.Date;
-				currentDate = currentDate.AddSeconds (addWindow.GetStart ());
+					this.addSession (this.ToEpochTime(currentDate), time, distance);
+					this.ShowEventsForDay ();
+				} catch{
+					MessageDialog md = new MessageDialog(this, 
+						DialogFlags.Modal, MessageType.Warning, 
+						ButtonsType.Close, "Invalid Input.\n Make sure your data has the format specified\n in the input field.\n\n\t٩(ಥ_ಥ)۶    ٩(ಥ_ಥ)۶   ٩(ಥ_ಥ)۶");
 
-				Console.WriteLine (currentDate);
-
-				var distance = addWindow.GetDistance ();
-				var time = addWindow.GetTime ();
-
-				this.addSession (this.ToEpochTime(currentDate), time, distance);
-				this.ShowEventsForDay ();
+					md.Run();
+					md.Destroy();
+				}
 			}
 			addWindow.Destroy ();
+
 		}
 
 		/// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gtk;
 
 namespace calendar
 {	
@@ -52,12 +53,15 @@ namespace calendar
 		/// </summary>
 		private void Build(){
 			SetDefaultSize (600, 600);
-		
+
+			var image = new Image ("./logo.png"); 
+
 			this.calendarVbox = new Gtk.VBox(false, 5);
 			this.bottomHBox = new Gtk.HBox (true, 5);
 			this.eventDetail = new Gtk.VBox (false, 5);
 
 			this.cal = new Gtk.Calendar ();
+			calendarVbox.PackStart (image);
 			calendarVbox.PackStart (this.cal, true, false, 5);
 
 			this.bottomHBox.PackStart(this.buildStats(), true, false, 5);
@@ -76,6 +80,8 @@ namespace calendar
 			//this.btnList.Clicked += (o, args) => this.ShowListTrips();
 			this.cal.DaySelected += (o, args) => this.ShowEventsForDay ();
 			this.cal.MonthChanged += (object sender, EventArgs e) => this.MarkEventsForMonth (this.cal.Month);
+			this.cal.NextYear += (object sender, EventArgs e) => this.MarkEventsForMonth (this.cal.Month);
+			this.cal.PrevYear += (object sender, EventArgs e) => this.MarkEventsForMonth (this.cal.Month);
 
 			// Show current day after bootstrap
 			this.ShowEventsForDay();
